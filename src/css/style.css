@@ -12,4 +12,49 @@ body {
   left: 0;
   width: 1920px;
   height: 1080px;
+  z-index: -1;
+}
+
+.window {
+  position: absolute;
+  top: 380px;
+  width: 102px;
+  height: 190px;
+  border: solid pink 20px;
+}
+
+#window1 {
+  left: 62px
+}
+
+#window2 {
+  left: 262px
+}
+
+#window3 {
+  left: 459px
+}
+
+#window4 {
+  left: 682px
+}
+
+#window5 {
+  left: 891px
+}
+
+#window6 {
+  left: 1101px
+}
+
+#window7 {
+  left: 1318px
+}
+
+#window8 {
+  left: 1519px
+}
+
+#window9 {
+  left: 1721px
 }
