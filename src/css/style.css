@@ -16,45 +16,54 @@ body {
 }
 
 .window {
+  opacity: .5;
   position: absolute;
   top: 380px;
   width: 102px;
-  height: 190px;
   border: solid pink 20px;
 }
 
 #window1 {
-  left: 62px
+  left: 62px;
+  height: 207px;
 }
 
 #window2 {
-  left: 262px
+  left: 262px;
+  height: 207px;
 }
 
 #window3 {
-  left: 459px
+  left: 459px;
+  height: 207px;
 }
 
 #window4 {
-  left: 682px
+  left: 682px;
+  height: 190px;
 }
 
 #window5 {
-  left: 891px
+  left: 891px;
+  height: 190px;
 }
 
 #window6 {
-  left: 1101px
+  left: 1101px;
+  height: 190px;
 }
 
 #window7 {
-  left: 1318px
+  left: 1318px;
+  height: 207px;
 }
 
 #window8 {
-  left: 1519px
+  left: 1519px;
+  height: 207px;
 }
 
 #window9 {
-  left: 1721px
+  left: 1721px;
+  height: 207px;
 }
