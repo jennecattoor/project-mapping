@@ -4,3 +4,5 @@ const init = () => {
 
 init()
 postMessage({ payload: 'removeLoading' }, '*')
+
+console.log('hallo jenne');
