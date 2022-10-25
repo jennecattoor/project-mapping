@@ -16,6 +16,10 @@ body {
   z-index: -1;
 }
 
+#c {
+  z-index: 2;
+}
+/*
 .window {
   opacity: .5;
   position: absolute;
@@ -67,4 +71,4 @@ body {
 #window9 {
   left: 1721px;
   height: 207px;
-}
+}*/
