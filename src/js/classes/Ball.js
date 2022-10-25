@@ -1,12 +1,16 @@
 import Vector from './Vector.js';
 
+const windowBorders = [[82, 184], [282, 384], [480, 582], [702, 804], [912, 1014], [1122, 1224], [1338, 1440], [1542, 1644], [1742, 1844]]
+const margin = 10;
 class Ball{
-    constructor(ctx, x, y, color){
+    constructor(ctx, window, windowBoolean, x, y, color){
+
         this.ctx = ctx;
         this.location = new Vector(x,y);
-        this.velocity = new Vector(1, 1.3); 
+        this.velocity = new Vector(2, 2.3); 
         this.color = color;
         this.size = 16;
+     
     }
     draw(){
         /*this.x += this.velocityX;
@@ -34,7 +38,108 @@ class Ball{
         if (this.location.y < 0 + this.size / 2) {
             this.velocity.y = Math.abs(this.velocity.y);
         }
+
+
+
         //boundaries windows
+
+        //check margin first
+      /*  let changeY;
+        let changeX;
+        if ((this.location.y< 400 &&this.location.y > 400 - margin) || (this.location.y> 607 &&this.location.y > 607 + margin)) {
+            let argument = windowBorders.some(border => {
+                return this.location.x > border[0] + this.size / 2  && this.location.x < border[1] + this.size / 2 
+             })
+            if (argument) {
+                changeY = true;
+                changeX = false;
+            }
+        }
+        if ((this.location.y> 400)  && (this.location.y< 607 )) {
+            let argument = windowBorders.some(border => {
+                return (this.location.x > border[0] -margin && this.location.x < border[0] ) || (this.location.x > border[1] && this.location.x < border[1] + margin)
+             })
+            if (argument) {
+                changeY = false;
+                changeX = true;
+            }
+        }
+        if ((this.location.y < 607 + this.size / 2) && (this.location.y > 400 + this.size / 2)) {
+            const inX = windowBorders.some(border => {
+                return this.location.x > border[0] + this.size / 2  && this.location.x < border[1] + this.size / 2 
+             })
+             if (inX) {
+                if (changeX) {
+                    this.velocity.x = -(this.velocity.x);
+                    changeX = false;
+                }
+                if (changeY) {
+                    this.velocity.y = -(this.velocity.y);
+                    changeY = false;
+                }
+             }
+        }
+*/
+
+
+       // als hij in de y zone zit
+       /*  if ((this.location.y < 607 + this.size / 2) && (this.location.y > 400 + this.size / 2)) {
+            const changeX = windowBorders.some(border => {
+                return this.location.x > border[0] + this.size / 2  && this.location.x < border[1] + this.size / 2 
+            })
+          // console.log(changeX);
+       
+            if (changeX){
+                    this.velocity.y = -(this.velocity.y);
+            }
+            if(!changeX){
+
+            }
+                
+            }*/
+            const XTop = windowBorders.some(border => {
+                return this.location.x > border[0] && this.location.x < border[1]
+            })
+
+            if ((this.location.y > 400 - margin) && (this.location.y < 400) && XTop) {
+                console.log('hij tikt vanboven');
+                this.velocity.y = -Math.abs(this.velocity.y);
+            }
+            if ((this.location.y > 607 - margin) && (this.location.y < 607) && XTop) {
+                console.log('hij tikt vanonder');
+                this.velocity.y = Math.abs(this.velocity.y);
+            }
+
+            const XLeft = windowBorders.some(border => {
+                return this.location.x > border[0] - margin && this.location.x < border[0]
+            })
+            if(this.location.y < 607 && this.location.y > 400 && XLeft){
+                console.log('hij tikt links');
+                 this.velocity.x = -Math.abs(this.velocity.x);
+            }
+            const XRight = windowBorders.some(border => {
+                return this.location.x > border[1] && this.location.x < border[1] + margin;
+            })
+             if(this.location.y < 607 && this.location.y > 400 && XRight){
+                console.log('hij tikt rechts');
+                 this.velocity.x = Math.abs(this.velocity.x);
+            }
+
+
+
+
+          
+            /* const changeY = windowBorders.some(border => {
+                return this.location.x > border[0] + this.size / 2  && this.location.x < border[1] + this.size / 2 
+             })
+             if (changeY) {
+                this.velocity.y = -(this.velocity.y);
+             }
+             else {
+                this.velocity.x = -(this.velocity.x);
+             }*/
+        
+        
 
     }
 }

@@ -3,7 +3,8 @@
 //const canvas = document.getElementById("c");
 //canvas.width = 1920;
 //canvas.height = 1080;
-import Ball from './classes/Ball.js'
+import Ball from './classes/Ball.js';
+import Utils from './Utils.js';
 
 
 
@@ -15,44 +16,36 @@ let ctx = canvas.getContext("2d");
 let timerAnimationFrame;
 let speedBlob = 20;
 
-let minY = 250;
-
 const blob = {
-  x: 1920,
-  y: 1080,
+  x: 500,
+  y: 500,
   radius: 100
 }
 
-/*
-const balls = [{
-  id: 1,
-  window: 2,
-  xPoos: 5,
-  yPoos: 5,
-  vx: 0.99,
-  vy: 0.25
-}]*/
-const balls = [];
+let balls = [];
 
 
 
 const init = () => {
   document.addEventListener("keydown", handleMoveBlob);
-
-  for (let i = 0; i < 2; i++) {
-    balls.push(new Ball(ctx, 50, 20, `#ff0000`));
-
-  }
-
+  createBalls();
   draw();
+}
+
+const createBalls = () => {
+  balls.push(new Ball(ctx, 2, true, 200, 800, `#ff0000`));
+  balls.push(new Ball(ctx, 2, true, 100, 100, `#ff0000`));
+  balls.push(new Ball(ctx, 2, true, 800, 100, `#ff0000`));
+  balls.push(new Ball(ctx, 2, true, 30, 100, `#ff0000`));
 }
 
 const draw = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
+  checkEatBlob();
   drawBlob();
-  shootBall();
   balls.forEach(ball => ball.draw());
+
   timerAnimationFrame = requestAnimationFrame(draw);
   return;
 }
@@ -63,11 +56,21 @@ const drawBlob = () => {
   ctx.fillStyle = "#FFF";
   ctx.fill();
   ctx.closePath();
+  ctx.fill();
 }
 
-const shootBall = () => {
-
-
+const checkEatBlob = () => {
+  const ballsToDelete = []
+  balls.forEach((ball, index) => {
+    //check of de blob een ball raakt
+    if (ball.location.x > blob.x - blob.radius && ball.location.x < blob.x + blob.radius && ball.location.y > blob.y - blob.radius && ball.location.y < blob.y + blob.radius) {
+      blob.radius += 50;
+      //balls.splice(ball, 1);
+      ballsToDelete.push(ball)
+    }
+  })
+  console.log(ballsToDelete);
+  balls = balls.filter(ball => !ballsToDelete.includes(ball));
 }
 
 const handleMoveBlob = (e) => {
@@ -105,15 +108,15 @@ const handleMoveBlob = (e) => {
   if (blob.x > canvas.width) {
     blob.x = canvas.width;
   }
-  if (blob.y < minY) {
-    blob.y = minY;
+  if (blob.y < 250) {
+    blob.y = 250;
   }
-  if (blob.y > canvas.height) {
-    blob.y = canvas.height;
+  if (blob.y > 1000) {
+    blob.y = 1000;
   }
+
+
 }
-
-
 
 init()
 postMessage({ payload: 'removeLoading' }, '*')
