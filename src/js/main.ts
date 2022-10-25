@@ -3,6 +3,8 @@
 //const canvas = document.getElementById("c");
 //canvas.width = 1920;
 //canvas.height = 1080;
+import Ball from './classes/Ball.js'
+
 
 
 const canvas = <HTMLCanvasElement>document.getElementById('c');
@@ -14,8 +16,6 @@ let timerAnimationFrame;
 let speedBlob = 20;
 
 let minY = 250;
-//let maxXR = 250;
-//let maxXL = 250;
 
 const blob = {
   x: 1920,
@@ -23,8 +23,27 @@ const blob = {
   radius: 100
 }
 
+/*
+const balls = [{
+  id: 1,
+  window: 2,
+  xPoos: 5,
+  yPoos: 5,
+  vx: 0.99,
+  vy: 0.25
+}]*/
+const balls = [];
+
+
+
 const init = () => {
   document.addEventListener("keydown", handleMoveBlob);
+
+  for (let i = 0; i < 2; i++) {
+    balls.push(new Ball(ctx, 50, 20, `#ff0000`));
+
+  }
+
   draw();
 }
 
@@ -32,6 +51,8 @@ const draw = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
   drawBlob();
+  shootBall();
+  balls.forEach(ball => ball.draw());
   timerAnimationFrame = requestAnimationFrame(draw);
   return;
 }
@@ -42,6 +63,11 @@ const drawBlob = () => {
   ctx.fillStyle = "#FFF";
   ctx.fill();
   ctx.closePath();
+}
+
+const shootBall = () => {
+
+
 }
 
 const handleMoveBlob = (e) => {
