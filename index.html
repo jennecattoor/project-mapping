@@ -158,13 +158,19 @@
         canvas.width = imgTexture.width / 2;
         canvas.height = imgTexture.height;
 
+
         canvas.addEventListener('mousemove', e => {
+          console.log('keydown');
           maskX = (e.layerX - imgMask.width / 2) / imgTexture.width;
           maskY = (e.layerY - imgMask.height / 2) / imgTexture.height;
 
           gl.uniform2f(maskOffsetLocation, maskX, maskY);
 
         });
+
+        globalShortcut.register('I', () => {
+          console.log('Electron loves global shortcuts!')
+        })
 
         gl.uniform2f(maskOffsetLocation, maskX, maskY);
 
