@@ -1,8 +1,8 @@
+
 const init = () => {
-  console.log('Hello from main.ts')
+  console.log('hello from init')
 }
 
 init()
 postMessage({ payload: 'removeLoading' }, '*')
 
-console.log('hallo jenne');
