@@ -32,6 +32,19 @@ const init = () => {
   document.addEventListener("keydown", handleMoveBlob);
   createBalls();
   draw();
+  video.addEventListener('ended', handleRestart);
+
+}
+const handleRestart = () => {
+  console.log('tijd om opnieuw te beginnen');
+  video.currentTime = 0;
+  blob.radius = 50;
+  blob.x = 500;
+  blob.y = 500;
+  video.style.transition = `clip-path 0s`;
+  createBalls();
+
+  draw();
 }
 
 const createBalls = () => {
@@ -50,12 +63,14 @@ const handleNewBall = () => {
 //start the animation if the blob is big enough
 const handleStartAnimation = () => {
   cancelAnimationFrame(timerAnimationFrame);
+  balls = [];
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   video.style.transition = `clip-path 2s`;
   video.style.clipPath = `circle(2000px at ${blob.x}px ${blob.y}px)`;
   video.currentTime = 0;
   video.play();
 }
+
 
 
 const draw = () => {
