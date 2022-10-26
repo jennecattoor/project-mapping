@@ -16,6 +16,8 @@ let ctx = canvas.getContext("2d");
 let timerAnimationFrame;
 let speedBlob = 20;
 
+const colors = ['#91a6ff', '#ff88dc', '#faff7f', '#fff']
+
 const blob = {
   x: 500,
   y: 500,
@@ -33,10 +35,14 @@ const init = () => {
 }
 
 const createBalls = () => {
-  balls.push(new Ball(ctx, 2, true, 300, 800, `#ff0000`));
-  balls.push(new Ball(ctx, 2, true, 300, 400, `#ff0000`));
-  balls.push(new Ball(ctx, 2, true, 800, 400, `#ff0000`));
-  balls.push(new Ball(ctx, 2, true, 30, 300, `#ff0000`));
+
+  console.log(Utils.random(0, colors.length - 1));
+
+  console.log(Utils.random(0, colors.length - 1));
+  balls.push(new Ball(ctx, 2, true, 300, 800, colors[0]));
+  balls.push(new Ball(ctx, 2, true, 300, 400, colors[1]));
+  balls.push(new Ball(ctx, 2, true, 800, 400, colors[2]));
+  balls.push(new Ball(ctx, 2, true, 30, 300, colors[3]));
 }
 
 const draw = () => {
@@ -69,7 +75,6 @@ const checkEatBlob = () => {
       ballsToDelete.push(ball)
     }
   })
-  console.log(ballsToDelete);
   balls = balls.filter(ball => !ballsToDelete.includes(ball));
 }
 
