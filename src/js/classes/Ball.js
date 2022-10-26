@@ -68,24 +68,7 @@ class Ball{
              if(this.location.y < 607 && this.location.y > 400 && XRight){
                 console.log('hij tikt rechts');
                  this.velocity.x = Math.abs(this.velocity.x);
-            }
-
-
-
-
-          
-            /* const changeY = windowBorders.some(border => {
-                return this.location.x > border[0] + this.size / 2  && this.location.x < border[1] + this.size / 2 
-             })
-             if (changeY) {
-                this.velocity.y = -(this.velocity.y);
-             }
-             else {
-                this.velocity.x = -(this.velocity.x);
-             }*/
-        
-        
-
+            }        
     }
 }
 

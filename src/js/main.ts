@@ -35,16 +35,6 @@ const init = () => {
   draw();
 }
 
-
-/*const addBackground = () => {
-  const background = new Image();
-  background.src = "assets/background_design.png";
-
-   //Make sure the image is loaded first otherwise nothing will draw.
-  background.onload = function () {
-  ctx.drawImage(background, 0, 0);
-  }
-}*/
 const createBalls = () => {
   console.log(Utils.random(0, colors.length - 1));
   console.log(Utils.random(0, colors.length - 1));
@@ -56,7 +46,6 @@ const createBalls = () => {
 
 const draw = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  //await addBackground();
 
   checkEatBlob();
   drawBlob();
@@ -72,9 +61,7 @@ const drawBlob = () => {
   //ctx.fillStyle = "#FFF";
   //ctx.fill();
   // ctx.closePath();
-
-  //moet ik nog een lader toevoegen voor de image?? nee toch?
-  const background = document.getElementById("background-design").style.clipPath = `circle(${blob.radius}px at ${blob.x}px ${blob.y}px)`;
+  document.getElementById("background-design").style.clipPath = `circle(${blob.radius}px at ${blob.x}px ${blob.y}px)`;
 }
 
 const checkEatBlob = () => {
@@ -83,7 +70,6 @@ const checkEatBlob = () => {
     //check of de blob een ball raakt
     if (ball.location.x > blob.x - blob.radius && ball.location.x < blob.x + blob.radius && ball.location.y > blob.y - blob.radius && ball.location.y < blob.y + blob.radius) {
       blob.radius += 50;
-      //balls.splice(ball, 1);
       ballsToDelete.push(ball)
     }
   })
@@ -131,8 +117,6 @@ const handleMoveBlob = (e) => {
   if (blob.y > 1000) {
     blob.y = 1000;
   }
-
-
 }
 
 init()
