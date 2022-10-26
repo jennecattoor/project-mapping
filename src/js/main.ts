@@ -30,14 +30,23 @@ let balls = [];
 
 const init = () => {
   document.addEventListener("keydown", handleMoveBlob);
+
   createBalls();
   draw();
 }
 
+
+/*const addBackground = () => {
+  const background = new Image();
+  background.src = "assets/background_design.png";
+
+   //Make sure the image is loaded first otherwise nothing will draw.
+  background.onload = function () {
+  ctx.drawImage(background, 0, 0);
+  }
+}*/
 const createBalls = () => {
-
   console.log(Utils.random(0, colors.length - 1));
-
   console.log(Utils.random(0, colors.length - 1));
   balls.push(new Ball(ctx, 2, true, 300, 800, colors[0]));
   balls.push(new Ball(ctx, 2, true, 300, 400, colors[1]));
@@ -47,6 +56,7 @@ const createBalls = () => {
 
 const draw = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  //await addBackground();
 
   checkEatBlob();
   drawBlob();
@@ -57,12 +67,14 @@ const draw = () => {
 }
 
 const drawBlob = () => {
-  ctx.beginPath();
-  ctx.ellipse(blob.x, blob.y, blob.radius, blob.radius, 0, 0, Math.PI * 2)
-  ctx.fillStyle = "#FFF";
-  ctx.fill();
-  ctx.closePath();
-  ctx.fill();
+  //ctx.beginPath();
+  //ctx.ellipse(blob.x, blob.y, blob.radius, blob.radius, 0, 0, Math.PI * 2)
+  //ctx.fillStyle = "#FFF";
+  //ctx.fill();
+  // ctx.closePath();
+
+  //moet ik nog een lader toevoegen voor de image?? nee toch?
+  const background = document.getElementById("background-design").style.clipPath = `circle(${blob.radius}px at ${blob.x}px ${blob.y}px)`;
 }
 
 const checkEatBlob = () => {
