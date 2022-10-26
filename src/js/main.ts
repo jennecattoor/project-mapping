@@ -25,6 +25,7 @@ const blob = {
 
 let balls = [];
 let timerAnimationFrame;
+const video = document.getElementById('video-animation') as HTMLVideoElement | null;
 
 
 const init = () => {
@@ -40,7 +41,7 @@ const createBalls = () => {
   balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
 }
 
-const handleEatenBall = () => {
+const handleNewBall = () => {
   //hier nog een check of er al niet meer dan 10 ballen zijn
   //hier nog een extra check dat als er minder dan 1 bal is omdat hij te rap is opgegeten er 3 ofzo worden toegevoegd?
   balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
@@ -50,15 +51,12 @@ const handleEatenBall = () => {
 const handleStartAnimation = () => {
   cancelAnimationFrame(timerAnimationFrame);
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  document.getElementById("background-design").style.transition = `clip-path 2s`;
-  document.getElementById("background-design").style.clipPath = `circle(2000px at ${blob.x}px ${blob.y}px)`;
-  setTimeout(() => {
-    //  const video = document.getElementById("video-animation");
-    const video = document.getElementById('video-animation') as HTMLVideoElement | null;
-    video.style.opacity = `1`;
-    video.play();
-  }, 1000)
+  video.style.transition = `clip-path 2s`;
+  video.style.clipPath = `circle(2000px at ${blob.x}px ${blob.y}px)`;
+  video.currentTime = 0;
+  video.play();
 }
+
 
 const draw = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -77,12 +75,8 @@ const draw = () => {
 }
 
 const drawBlob = () => {
-  //ctx.beginPath();
   //ctx.ellipse(blob.x, blob.y, blob.radius, blob.radius, 0, 0, Math.PI * 2)
-  //ctx.fillStyle = "#FFF";
-  //ctx.fill();
-  // ctx.closePath();
-  document.getElementById("background-design").style.clipPath = `circle(${blob.radius}px at ${blob.x}px ${blob.y}px)`;
+  video.style.clipPath = `circle(${blob.radius}px at ${blob.x}px ${blob.y}px)`;
 }
 
 const checkEatBlob = () => {
@@ -92,7 +86,7 @@ const checkEatBlob = () => {
     if (ball.location.x > blob.x - blob.radius && ball.location.x < blob.x + blob.radius && ball.location.y > blob.y - blob.radius && ball.location.y < blob.y + blob.radius) {
       blob.radius += 50;
       ballsToDelete.push(ball);
-      handleEatenBall();
+      handleNewBall();
     }
   })
   balls = balls.filter(ball => !ballsToDelete.includes(ball));
