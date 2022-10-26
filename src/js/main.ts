@@ -13,7 +13,7 @@ canvas.width = 1920;
 canvas.height = 1080;
 let ctx = canvas.getContext("2d");
 
-let timerAnimationFrame;
+
 let speedBlob = 20;
 
 const colors = ['#91a6ff', '#ff88dc', '#faff7f', '#fff']
@@ -25,7 +25,7 @@ const blob = {
 }
 
 let balls = [];
-
+let timerAnimationFrame;
 
 
 const init = () => {
@@ -44,6 +44,10 @@ const createBalls = () => {
   balls.push(new Ball(ctx, 30, 300, colors[3]));
 }
 const handleEatenBall = () => {
+  balls.push(new Ball(ctx, 300, 800, colors[0]));
+  if (blob.radius > 500) {
+    console.log('groter dan 500')
+  }
 
 }
 
@@ -54,7 +58,13 @@ const draw = () => {
   drawBlob();
   balls.forEach(ball => ball.draw());
 
-  timerAnimationFrame = requestAnimationFrame(draw);
+  if (blob.radius < 500) {
+    timerAnimationFrame = requestAnimationFrame(draw);
+  }
+  if (blob.radius >= 500) {
+    cancelAnimationFrame(timerAnimationFrame);
+  }
+
   return;
 }
 
