@@ -3,7 +3,7 @@ import Vector from './Vector.js';
 const windowBorders = [[82, 184], [282, 384], [480, 582], [702, 804], [912, 1014], [1122, 1224], [1338, 1440], [1542, 1644], [1742, 1844]]
 const margin = 10;
 class Ball{
-    constructor(ctx, window, windowBoolean, x, y, color){
+    constructor(ctx, x, y, color){
 
         this.ctx = ctx;
         this.location = new Vector(x,y);

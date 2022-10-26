@@ -21,7 +21,7 @@ const colors = ['#91a6ff', '#ff88dc', '#faff7f', '#fff']
 const blob = {
   x: 500,
   y: 500,
-  radius: 100
+  radius: 50
 }
 
 let balls = [];
@@ -38,10 +38,13 @@ const init = () => {
 const createBalls = () => {
   console.log(Utils.random(0, colors.length - 1));
   console.log(Utils.random(0, colors.length - 1));
-  balls.push(new Ball(ctx, 2, true, 300, 800, colors[0]));
-  balls.push(new Ball(ctx, 2, true, 300, 400, colors[1]));
-  balls.push(new Ball(ctx, 2, true, 800, 400, colors[2]));
-  balls.push(new Ball(ctx, 2, true, 30, 300, colors[3]));
+  balls.push(new Ball(ctx, 300, 800, colors[0]));
+  balls.push(new Ball(ctx, 300, 400, colors[1]));
+  balls.push(new Ball(ctx, 800, 400, colors[2]));
+  balls.push(new Ball(ctx, 30, 300, colors[3]));
+}
+const handleEatenBall = () => {
+
 }
 
 const draw = () => {
@@ -70,7 +73,8 @@ const checkEatBlob = () => {
     //check of de blob een ball raakt
     if (ball.location.x > blob.x - blob.radius && ball.location.x < blob.x + blob.radius && ball.location.y > blob.y - blob.radius && ball.location.y < blob.y + blob.radius) {
       blob.radius += 50;
-      ballsToDelete.push(ball)
+      ballsToDelete.push(ball);
+      handleEatenBall();
     }
   })
   balls = balls.filter(ball => !ballsToDelete.includes(ball));
