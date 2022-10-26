@@ -7,7 +7,6 @@ import Ball from './classes/Ball.js';
 import Utils from './Utils.js';
 
 
-
 const canvas = <HTMLCanvasElement>document.getElementById('c');
 canvas.width = 1920;
 canvas.height = 1080;
@@ -30,39 +29,42 @@ let timerAnimationFrame;
 
 const init = () => {
   document.addEventListener("keydown", handleMoveBlob);
-
   createBalls();
   draw();
 }
 
 const createBalls = () => {
-  console.log(Utils.random(0, colors.length - 1));
-  console.log(Utils.random(0, colors.length - 1));
-  balls.push(new Ball(ctx, 300, 800, colors[0]));
-  balls.push(new Ball(ctx, 300, 400, colors[1]));
-  balls.push(new Ball(ctx, 800, 400, colors[2]));
-  balls.push(new Ball(ctx, 30, 300, colors[3]));
+  balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
+  balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
+  balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
+  balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
 }
-const handleEatenBall = () => {
-  balls.push(new Ball(ctx, 300, 800, colors[0]));
-  if (blob.radius > 500) {
-    console.log('groter dan 500')
-  }
 
+const handleEatenBall = () => {
+  //hier nog een check of er al niet meer dan 10 ballen zijn
+  //hier nog een extra check dat als er minder dan 1 bal is omdat hij te rap is opgegeten er 3 ofzo worden toegevoegd?
+  balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
+}
+
+//start the animation if the blob is big enough
+const handleStartAnimation = () => {
+  cancelAnimationFrame(timerAnimationFrame);
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  document.getElementById("background-design").style.transition = `clip-path 2s`;
+  document.getElementById("background-design").style.clipPath = `circle(2000px at ${blob.x}px ${blob.y}px)`;
 }
 
 const draw = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-  checkEatBlob();
-  drawBlob();
-  balls.forEach(ball => ball.draw());
-
   if (blob.radius < 500) {
+    checkEatBlob();
+    drawBlob();
+    balls.forEach(ball => ball.draw());
     timerAnimationFrame = requestAnimationFrame(draw);
   }
   if (blob.radius >= 500) {
-    cancelAnimationFrame(timerAnimationFrame);
+    handleStartAnimation();
   }
 
   return;

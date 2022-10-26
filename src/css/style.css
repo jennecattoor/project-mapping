@@ -23,6 +23,7 @@ body {
   width: 1920px;
   height: 1080px;
   z-index: -1;
+  clip-path: none;
 }
 
 
