@@ -51,9 +51,15 @@ const createBalls = () => {
 }
 
 const handleNewBall = () => {
+  if (balls.length <= 6) {
+    balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
+  }
+  else {
+    return;
+  }
   //hier nog een check of er al niet meer dan 10 ballen zijn
   //hier nog een extra check dat als er minder dan 1 bal is omdat hij te rap is opgegeten er 3 ofzo worden toegevoegd?
-  balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
+
 }
 
 //start the animation if the blob is big enough
