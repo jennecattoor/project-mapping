@@ -33,10 +33,10 @@ const init = () => {
 }
 
 const createBalls = () => {
-  balls.push(new Ball(ctx, 2, true, 200, 800, `#ff0000`));
-  balls.push(new Ball(ctx, 2, true, 100, 100, `#ff0000`));
-  balls.push(new Ball(ctx, 2, true, 800, 100, `#ff0000`));
-  balls.push(new Ball(ctx, 2, true, 30, 100, `#ff0000`));
+  balls.push(new Ball(ctx, 2, true, 300, 800, `#ff0000`));
+  balls.push(new Ball(ctx, 2, true, 300, 400, `#ff0000`));
+  balls.push(new Ball(ctx, 2, true, 800, 400, `#ff0000`));
+  balls.push(new Ball(ctx, 2, true, 30, 300, `#ff0000`));
 }
 
 const draw = () => {

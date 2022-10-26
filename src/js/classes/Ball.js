@@ -32,71 +32,16 @@ class Ball{
         if (this.location.x < 0 + this.size / 2) {
             this.velocity.x = Math.abs(this.velocity.x);
         }
-        if (this.location.y > 1090 - (this.size / 2)) {
+        if (this.location.y > 1000 - (this.size / 2)) {
             this.velocity.y = -Math.abs(this.velocity.y);
         }
-        if (this.location.y < 0 + this.size / 2) {
+        if (this.location.y < 280 + this.size / 2) {
             this.velocity.y = Math.abs(this.velocity.y);
         }
 
 
 
         //boundaries windows
-
-        //check margin first
-      /*  let changeY;
-        let changeX;
-        if ((this.location.y< 400 &&this.location.y > 400 - margin) || (this.location.y> 607 &&this.location.y > 607 + margin)) {
-            let argument = windowBorders.some(border => {
-                return this.location.x > border[0] + this.size / 2  && this.location.x < border[1] + this.size / 2 
-             })
-            if (argument) {
-                changeY = true;
-                changeX = false;
-            }
-        }
-        if ((this.location.y> 400)  && (this.location.y< 607 )) {
-            let argument = windowBorders.some(border => {
-                return (this.location.x > border[0] -margin && this.location.x < border[0] ) || (this.location.x > border[1] && this.location.x < border[1] + margin)
-             })
-            if (argument) {
-                changeY = false;
-                changeX = true;
-            }
-        }
-        if ((this.location.y < 607 + this.size / 2) && (this.location.y > 400 + this.size / 2)) {
-            const inX = windowBorders.some(border => {
-                return this.location.x > border[0] + this.size / 2  && this.location.x < border[1] + this.size / 2 
-             })
-             if (inX) {
-                if (changeX) {
-                    this.velocity.x = -(this.velocity.x);
-                    changeX = false;
-                }
-                if (changeY) {
-                    this.velocity.y = -(this.velocity.y);
-                    changeY = false;
-                }
-             }
-        }
-*/
-
-
-       // als hij in de y zone zit
-       /*  if ((this.location.y < 607 + this.size / 2) && (this.location.y > 400 + this.size / 2)) {
-            const changeX = windowBorders.some(border => {
-                return this.location.x > border[0] + this.size / 2  && this.location.x < border[1] + this.size / 2 
-            })
-          // console.log(changeX);
-       
-            if (changeX){
-                    this.velocity.y = -(this.velocity.y);
-            }
-            if(!changeX){
-
-            }
-                
-            }*/
             const XTop = windowBorders.some(border => {
                 return this.location.x > border[0] && this.location.x < border[1]
             })
