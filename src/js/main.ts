@@ -1,8 +1,3 @@
-//let canvas = <HTMLCanvasElement>document.getElementById("mycanvas");
-//let ctx = canvas.getContext("2d");
-//const canvas = document.getElementById("c");
-//canvas.width = 1920;
-//canvas.height = 1080;
 import Ball from './classes/Ball.js';
 import Utils from './Utils.js';
 
@@ -18,14 +13,15 @@ let speedBlob = 20;
 const colors = ['#91a6ff', '#ff88dc', '#faff7f', '#fff']
 
 const blob = {
-  x: 500,
-  y: 500,
+  x: 960,
+  y: 700,
   radius: 50
 }
 
 let balls = [];
 let timerAnimationFrame;
 const video = document.getElementById('video-animation') as HTMLVideoElement | null;
+let clap2 = new Audio("assets/clap.mp3");
 
 
 const init = () => {
@@ -39,8 +35,8 @@ const handleRestart = () => {
   console.log('tijd om opnieuw te beginnen');
   video.currentTime = 0;
   blob.radius = 50;
-  blob.x = 500;
-  blob.y = 500;
+  blob.x = 960;
+  blob.y = 700;
   video.style.transition = `clip-path 0s`;
   createBalls();
 
@@ -100,7 +96,9 @@ const checkEatBlob = () => {
     //check of de blob een ball raakt
     if (ball.location.x > blob.x - blob.radius && ball.location.x < blob.x + blob.radius && ball.location.y > blob.y - blob.radius && ball.location.y < blob.y + blob.radius) {
       blob.radius += 50;
+      clap2.play();
       ballsToDelete.push(ball);
+
       handleNewBall();
     }
   })
