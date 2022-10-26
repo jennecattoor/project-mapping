@@ -52,6 +52,12 @@ const handleStartAnimation = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   document.getElementById("background-design").style.transition = `clip-path 2s`;
   document.getElementById("background-design").style.clipPath = `circle(2000px at ${blob.x}px ${blob.y}px)`;
+  setTimeout(() => {
+    //  const video = document.getElementById("video-animation");
+    const video = document.getElementById('video-animation') as HTMLVideoElement | null;
+    video.style.opacity = `1`;
+    video.play();
+  }, 1000)
 }
 
 const draw = () => {
