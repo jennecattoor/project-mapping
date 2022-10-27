@@ -9,6 +9,7 @@ let ctx = canvas.getContext("2d");
 
 
 let speedBlob = 20;
+let maxSizeBlob = 650;
 
 const colors = ['#91a6ff', '#ff88dc', '#faff7f', '#fff']
 
@@ -21,7 +22,8 @@ const blob = {
 let balls = [];
 let timerAnimationFrame;
 const video = document.getElementById('video-animation') as HTMLVideoElement | null;
-let clap2 = new Audio("assets/clap.mp3");
+let clap = new Audio("assets/clap.mp3");
+clap.volume = 0.5;
 
 
 const init = () => {
@@ -29,19 +31,40 @@ const init = () => {
   createBalls();
   draw();
   video.addEventListener('ended', handleRestart);
-
 }
+
 const handleRestart = () => {
   console.log('tijd om opnieuw te beginnen');
-  video.currentTime = 0;
-  blob.radius = 50;
+  video.style.transition = `clip-path 0s`;
+  blob.radius = 0;
   blob.x = 960;
   blob.y = 700;
-  video.style.transition = `clip-path 0s`;
-  createBalls();
 
-  draw();
+  drawBlob();
+
+  setTimeout(() => {
+    console.log("Delayed for 2 second.");
+    video.style.transition = `clip-path 1s`;
+    blob.radius = 50;
+    blob.x = 960;
+    blob.y = 700;
+    drawBlob();
+    //  video.style.transition = `clip-path 0s`;
+    //  draw();
+    //  createBalls();
+    video.currentTime = 0;
+
+  }, 2000);
+  setTimeout(() => {
+    console.log("Delayed for 3 second.");
+    video.style.transition = `clip-path 0s`;
+    createBalls();
+    draw();
+  }, 3000);
+
 }
+
+
 
 const createBalls = () => {
   balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
@@ -67,7 +90,7 @@ const handleStartAnimation = () => {
   cancelAnimationFrame(timerAnimationFrame);
   balls = [];
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  video.style.transition = `clip-path 2s`;
+  video.style.transition = `clip-path 1s`;
   video.style.clipPath = `circle(2000px at ${blob.x}px ${blob.y}px)`;
   video.currentTime = 0;
   video.play();
@@ -78,13 +101,13 @@ const handleStartAnimation = () => {
 const draw = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-  if (blob.radius < 500) {
+  if (blob.radius < maxSizeBlob) {
     checkEatBlob();
     drawBlob();
     balls.forEach(ball => ball.draw());
     timerAnimationFrame = requestAnimationFrame(draw);
   }
-  if (blob.radius >= 500) {
+  if (blob.radius >= maxSizeBlob) {
     handleStartAnimation();
   }
 
@@ -102,7 +125,7 @@ const checkEatBlob = () => {
     //check of de blob een ball raakt
     if (ball.location.x > blob.x - blob.radius && ball.location.x < blob.x + blob.radius && ball.location.y > blob.y - blob.radius && ball.location.y < blob.y + blob.radius) {
       blob.radius += 50;
-      clap2.play();
+      clap.play();
       ballsToDelete.push(ball);
 
       handleNewBall();
