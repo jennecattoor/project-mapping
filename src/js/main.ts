@@ -10,6 +10,7 @@ let ctx = canvas.getContext("2d");
 
 let speedBlob = 20;
 let maxSizeBlob = 650;
+const margin = 20;
 
 const colors = ['#91a6ff', '#ff88dc', '#faff7f', '#fff']
 
@@ -33,41 +34,10 @@ const init = () => {
   video.addEventListener('ended', handleRestart);
 }
 
-const handleRestart = () => {
-  console.log('tijd om opnieuw te beginnen');
-  video.style.transition = `clip-path 0s`;
-  blob.radius = 0;
-  blob.x = 960;
-  blob.y = 700;
-
-  drawBlob();
-
-  setTimeout(() => {
-    console.log("Delayed for 2 second.");
-    video.style.transition = `clip-path 1s`;
-    blob.radius = 50;
-    blob.x = 960;
-    blob.y = 700;
-    drawBlob();
-    //  video.style.transition = `clip-path 0s`;
-    //  draw();
-    //  createBalls();
-    video.currentTime = 0;
-
-  }, 2000);
-  setTimeout(() => {
-    console.log("Delayed for 3 second.");
-    video.style.transition = `clip-path 0s`;
-    createBalls();
-    draw();
-  }, 3000);
-
-}
 
 
 
 const createBalls = () => {
-  balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
   balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
   balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
   balls.push(new Ball(ctx, Utils.random(0, canvas.width), Utils.random(280, 1000), colors[Utils.random(0, (colors.length - 1))]));
@@ -96,7 +66,22 @@ const handleStartAnimation = () => {
   video.play();
 }
 
-
+//de rand van het raam kleurt als de ball ertegen botst
+const checkTouchWindow = () => {
+  const windowBorders = [[82, 184], [282, 384], [480, 582], [702, 804], [912, 1014], [1122, 1224], [1338, 1440], [1542, 1644], [1742, 1844]]
+  balls.forEach(ball => {
+    windowBorders.forEach(border => {
+      if (ball.location.x >= border[0] - margin && ball.location.x <= border[1] + margin && ball.location.y >= 400 - margin && ball.location.y <= 607 + margin) {
+        console.log('tikke');
+        ctx.beginPath();
+        ctx.lineWidth = 15;
+        ctx.strokeStyle = ball.color;
+        ctx.rect(border[0], 400, 102, 207);
+        ctx.stroke();
+      }
+    })
+  })
+}
 
 const draw = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -105,6 +90,7 @@ const draw = () => {
     checkEatBlob();
     drawBlob();
     balls.forEach(ball => ball.draw());
+    const window = checkTouchWindow();
     timerAnimationFrame = requestAnimationFrame(draw);
   }
   if (blob.radius >= maxSizeBlob) {
@@ -175,6 +161,32 @@ const handleMoveBlob = (e) => {
   if (blob.y > 1000) {
     blob.y = 1000;
   }
+}
+
+const handleRestart = () => {
+  console.log('tijd om opnieuw te beginnen');
+  video.style.transition = `clip-path 0s`;
+  blob.radius = 0;
+  blob.x = 960;
+  blob.y = 700;
+  drawBlob();
+
+  setTimeout(() => {
+    console.log("Delayed for 2 second.");
+    video.style.transition = `clip-path 1s`;
+    blob.radius = 50;
+    blob.x = 960;
+    blob.y = 700;
+    drawBlob();
+    video.currentTime = 0;
+
+  }, 2000);
+  setTimeout(() => {
+    console.log("Delayed for 3 second.");
+    video.style.transition = `clip-path 0s`;
+    createBalls();
+    draw();
+  }, 3000);
 }
 
 init()

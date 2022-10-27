@@ -13,8 +13,6 @@ class Ball{
      
     }
     draw(){
-        /*this.x += this.velocityX;
-        this.y += this.velocityY;*/
         this.location.add(this.velocity);
         this.checkCollision();
 
