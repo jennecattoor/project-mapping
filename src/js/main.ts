@@ -12,7 +12,7 @@ let speedBlob = 20;
 let maxSizeBlob = 650;
 const margin = 20;
 
-const colors = ['#91a6ff', '#ff88dc', '#faff7f', '#fff']
+const colors = ['#f726e4', '#ffc024', '#58d31e', '#1afaff', '#ecfc1d']
 
 const blob = {
   x: 960,
@@ -25,6 +25,8 @@ let timerAnimationFrame;
 const video = document.getElementById('video-animation') as HTMLVideoElement | null;
 let clap = new Audio("assets/clap.mp3");
 clap.volume = 0.5;
+
+const introTekst = document.querySelector('.container__tekst');
 
 //-------------START---------------//
 const init = () => {
@@ -46,6 +48,10 @@ const createBalls = () => {
 const draw = () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
+  if (!(blob.x == 960) || !(blob.y == 770)) {
+    introTekst.classList.add('--hidden');
+  }
+
   if (blob.radius < maxSizeBlob) {
     checkEatBlob();
     drawBlob();
@@ -66,6 +72,7 @@ const drawBlob = () => {
 }
 
 const checkEatBlob = () => {
+
   const ballsToDelete = []
   balls.forEach((ball, index) => {
     //check of de blob een ball raakt
@@ -176,7 +183,7 @@ const handleRestart = () => {
     video.style.transition = `clip-path 1s`;
     blob.radius = 50;
     blob.x = 960;
-    blob.y = 700;
+    blob.y = 770;
     drawBlob();
     video.currentTime = 0;
 
@@ -186,6 +193,7 @@ const handleRestart = () => {
     video.style.transition = `clip-path 0s`;
     createBalls();
     draw();
+    introTekst.classList.remove('--hidden');
   }, 3000);
 }
 

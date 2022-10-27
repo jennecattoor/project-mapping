@@ -5,9 +5,10 @@ body {
   color: white;
 }
 
+
 #building-template {
   /* display: none; */
-  opacity: 0.5;
+  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -32,56 +33,41 @@ body {
 #c {
   z-index: 2;
 }
-/*
-.window {
-  opacity: .5;
+.container__tekst {
   position: absolute;
-  top: 380px;
-  width: 102px;
-  border: solid pink 20px;
+  display: block;
+
+
+}
+.tekst {
+    position: relative;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  color: white;
+  text-align: center;
 }
 
-#window1 {
-  left: 62px;
-  height: 207px;
+.tekstLeft__top {
+    top: 590px;
+    left: 130px;
+}
+.tekstLeft__bottom {
+  top: 550px;
+  left: 130px;
 }
 
-#window2 {
-  left: 262px;
-  height: 207px;
+.tekstRight__top {
+  top: 419px;
+  left: 1400px;
 }
 
-#window3 {
-  left: 459px;
-  height: 207px;
-}
+.tekstRight__bottom {
+  top: 379px;
+  left: 1400px;
 
-#window4 {
-  left: 682px;
-  height: 190px;
 }
-
-#window5 {
-  left: 891px;
-  height: 190px;
+.--hidden {
+  display: none;
 }
-
-#window6 {
-  left: 1101px;
-  height: 190px;
-}
-
-#window7 {
-  left: 1318px;
-  height: 207px;
-}
-
-#window8 {
-  left: 1519px;
-  height: 207px;
-}
-
-#window9 {
-  left: 1721px;
-  height: 207px;
-}*/
