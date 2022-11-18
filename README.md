@@ -1,4 +1,4 @@
-## Overview
+## Projection mapping
 
-🚀 Quick Start of [vite-plugin-electron](https://github.com/electron-vite/vite-plugin-electron)  
-🎯 Based on the official [template-vanilla-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-vanilla-ts), less invasive  # project-mapping
+🚀 Build with vite 
+🎯 A game that is projected on the building of Broelkaai 6 for the expo Wonder in Kortrijk.
